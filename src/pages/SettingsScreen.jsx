@@ -18,10 +18,8 @@ export default function () {
   }, [])
 
   init = async () => {
-    const { 
-      ip, 
-      port 
-    } = await setupSocket( await storage.get('ip'), await storage.get('port'))
+    let ip = await storage.get('ip') || '192.168.1.1'
+    let port = await storage.get('port') || '1234'
 
     setIp( ip )
     setPort( port )

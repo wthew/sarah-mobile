@@ -1,42 +1,37 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import styled from 'styled-components';
 
+const Box = styled.View`
+    margin: 5px;
+    background-color: white;
+    align-self: ${props => props.sender == 'bot'? 'flex-start': 'flex-end'};
+    align-items: ${props => props.sender == 'bot'? 'flex-start': 'flex-end'}
+    min-width: 32px;
+    min-height: 32px;
+    max-width: 256px;
+    elevation: 4;
+    border-radius: 15px;
+    padding: 10px;
+    border-top-${props => props.sender == 'bot'? 'left': 'right'}-radius: 0px;
+`;
 
-export default function ({ sender, text }) {
+const MesageText = styled.Text`
+  margin: 5px
+  font-size: 14px;
+  color: #888;
+`;
+
+const LabelTime = styled.Text`
+  margin: auto
+  font-size: 9px;
+  color: #aaa;
+`;
+
+export default function ({ sender, text, date }) {
   return (
-    <View style={sender == 'sarah' ? styles.containerLeft: styles.containerRight}>
-      <View style={styles.msgBox} >
-        <Text style={styles.mainText}>{text}</Text>
-      </View>
-    </View>
-
+    <Box sender={sender}>
+      <LabelTime>{date}</LabelTime>
+      <MesageText>{text}</MesageText>
+    </Box>
   );
 }
-
-const styles = StyleSheet.create({
-  msgBox: {
-    margin: 5,
-    backgroundColor: '#fff',
-    minWidth: 32,
-    minHeight: 32,
-    maxWidth: 256,
-    elevation: 2,
-    borderRadius: 10,
-    padding: 10,
-    justifyContent: 'flex-end',
-    alignItems: 'flex-start'
-  },
-  containerLeft: {
-    alignSelf: 'flex-start',
-  },
-  containerRight: {
-    alignSelf: 'flex-end',
-  },
-  mainText: {
-    color: '#777'
-  },
-  senderLabel: {
-    color: '#999',
-    fontSize: 8
-  }
-})

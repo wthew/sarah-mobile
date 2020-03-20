@@ -26,7 +26,12 @@
     },
     "android": {
       "package": "com.wthew.sarah",
-      "versionCode": 1
-    }
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#039be5",
+        "foregroundImage": "./assets/icon-fg.png"
+      }
+    },
+    "description": ""
   }
 }
