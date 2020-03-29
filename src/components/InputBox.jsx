@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     bottom: 15,
     left: 20,
     right: 20,
-    flexDirection: "row"
+    flexDirection: "row",
   },
 
   input: {

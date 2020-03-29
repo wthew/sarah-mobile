@@ -27,12 +27,15 @@ export default function({ navigation }) {
   }, []);
 
   async function initServer() {
-    let ip = (await storage.get("ip")) || "192.168.1.1";
-    let port = (await storage.get("port")) || "1234";
-
-    Sock = Client(ip, port);
+    console.log('mainScreen');
+    
+    Sock = Client(
+      await storage.get_ip(), 
+      await storage.get_port()
+    );
 
     Sock.handle(handleMessages);
+    // Sock.onclose = () => initServer
   }
 
   function handleMessages(message) {
@@ -70,18 +73,17 @@ export default function({ navigation }) {
     };
 
     setMessages(messages => [...messages, message]);
-    Sock.send(text);
+    Sock.send(text)
   }
 
   return (
-    <ImageBackground style={styles.bg}>
       <KeyboardAvoidingView
         behavior="height"
         style={styles.container}
-        keyboardVerticalOffset={80}
+        keyboardVerticalOffset={75}
       >
         <AutoScroll style={styles.scrollContainer}>
-          {messages.map((msg, i) => (
+          {messages.map( (msg, i) => (
             <MessageBox
               key={i}
               sender={msg.sender}
@@ -92,7 +94,6 @@ export default function({ navigation }) {
         </AutoScroll>
         <InputBox onSubmit={handleSubmit} />
       </KeyboardAvoidingView>
-    </ImageBackground>
   );
 }
 
@@ -101,7 +102,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 10
   },
   scrollContainer: {
     flex: 1,
