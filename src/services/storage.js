@@ -2,6 +2,20 @@ import { AsyncStorage } from 'react-native';
 
 // Storage
 export default () => {
+  data = await AsyncStorage.getItem('data') || {}
+
+  async function set(key, value) {
+    data[key] = value
+    await commit()
+  }
+
+  async function get(key) {
+    return JSON.parse(await AsyncStorage.getItem('data'))[key]
+  }
+
+  async function commit() {
+    await AsyncStorage.setItem('data', JSON.stringify(data))
+  }
 
   async function set_ip(value) {
     await AsyncStorage.setItem('ip', value);
@@ -27,6 +41,10 @@ export default () => {
     get_ip,
     get_port,
     set_ip,
-    set_port
+    set_port,
+    set,
+    get,
+    commit,
+    data
   }
 }
