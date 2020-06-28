@@ -1,8 +1,12 @@
 import { AsyncStorage } from 'react-native';
 
 // Storage
-export default () => {
-  data = await AsyncStorage.getItem('data') || {}
+function storage() {
+  var data = {};
+
+  async function init() {
+    data = await JSON.parse(await AsyncStorage.getItem('data')) || {}
+  }
 
   async function set(key, value) {
     data[key] = value
@@ -37,6 +41,8 @@ export default () => {
     return await AsyncStorage.getItem('port') || '1234';
   }
 
+  init()
+
   return {
     get_ip,
     get_port,
@@ -48,3 +54,6 @@ export default () => {
     data
   }
 }
+
+
+export default storage

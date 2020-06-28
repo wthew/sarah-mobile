@@ -12,11 +12,11 @@ import InputBox from "../components/InputBox";
 import MessageBox from "../components/MessageBox";
 
 import Client from "../services/socket";
-import Storage from "../services/storage";
+import storage from "../services/storage";
+
+const Storage = storage()
 
 import { setupSocket } from "../services/util";
-
-const storage = Storage();
 
 export default function({ navigation }) {
   const [messages, setMessages] = useState([]);
@@ -30,8 +30,8 @@ export default function({ navigation }) {
     console.log('mainScreen');
     
     Sock = Client(
-      await storage.get_ip(), 
-      await storage.get_port()
+      await Storage.get_ip(), 
+      await Storage.get_port()
     );
 
     Sock.handle(handleMessages);
@@ -80,7 +80,8 @@ export default function({ navigation }) {
       <KeyboardAvoidingView
         behavior="height"
         style={styles.container}
-        keyboardVerticalOffset={75}
+        keyboardVerticalOffset={80}
+        
       >
         <AutoScroll style={styles.scrollContainer}>
           {messages.map( (msg, i) => (
@@ -105,8 +106,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
-    alignSelf: "stretch",
-    marginBottom: 70
+    alignSelf: "stretch"
   },
   bg: {
     width: "100%",

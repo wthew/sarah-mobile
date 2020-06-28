@@ -14,7 +14,6 @@ export default function() {
       onPress={() =>
         navigation.dispatch(
           CommonActions.reset({
-            index: 1,
             routes: [
               { name: "Chat", }
             ]
