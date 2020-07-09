@@ -1,59 +1,43 @@
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import { EventEmitter } from 'events';
 
-// Storage
-function storage() {
-  var data = {};
+const storage = (function () {
+  let data = {};
+  const eventManager = new EventEmitter();
 
-  async function init() {
-    data = await JSON.parse(await AsyncStorage.getItem('data')) || {}
+  const init = async () => {
+    const _storageData = JSON.parse(await AsyncStorage.getItem('data'))
+    if (_storageData === null) await AsyncStorage.setItem('data', '{}')
+    data = _storageData
   }
 
-  async function set(key, value) {
+  const set = async (key, value) => {
     data[key] = value
-    await commit()
+    await AsyncStorage.setItem('data', JSON.stringify(data))
+    eventManager.emit('set');
   }
 
-  async function get(key) {
+  const get = async (key) => {
     return JSON.parse(await AsyncStorage.getItem('data'))[key]
   }
 
-  async function commit() {
-    await AsyncStorage.setItem('data', JSON.stringify(data))
+  const on = (event, callback) => {
+    eventManager.on(event, callback);
   }
 
-  async function set_ip(value) {
-    await AsyncStorage.setItem('ip', value);
-  }
-
-  async function set_port(value) {
-    await AsyncStorage.setItem('port', value);
-  }
-
-  async function get_ip() {
-    console.log(await AsyncStorage.getItem('ip') || '192.168.1.1');
-    
-    return await AsyncStorage.getItem('ip') || '192.168.1.1';
-  }
-
-  async function get_port() {
-    console.log(await AsyncStorage.getItem('port') || '1234');
-    
-    return await AsyncStorage.getItem('port') || '1234';
+  const off = (event, callback) => {
+    eventManager.removeListener(event, callback)
   }
 
   init()
 
   return {
-    get_ip,
-    get_port,
-    set_ip,
-    set_port,
+    init,
     set,
     get,
-    commit,
-    data
+    on,
+    off
   }
-}
-
+})()
 
 export default storage

@@ -11,31 +11,29 @@ import RefreshButton from "./components/RefreshButton";
 
 const Stack = createStackNavigator();
 
-export default function Routes() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        headerTintColor: '#039be5',
-        headerTitleAlign: "center",
-        headerTitleStyle: {
-          fontSize: 18
-        }
-      }}>
-        <Stack.Screen
-          name="Chat"
-          component={Main}
-          options={{
-            headerLeft: () => <RefreshButton />,
-            headerRight: () => <SettingsButton  />,
-          }}
-        />
-        <Stack.Screen 
-          name="Settings" 
-          component={Settings}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+const Routes = () => <NavigationContainer>
+  <Stack.Navigator
+  
+  screenOptions={{
+    headerTintColor: '#039be5',
+    headerTitleAlign: "center",
+    headerTitleStyle: {
+      fontSize: 18
+    }
+  }}>
+    <Stack.Screen
+      name="Chat"
+      component={Main}
+      options={{
+        headerLeft: () => <RefreshButton />,
+        headerRight: () => <SettingsButton />,
+      }}
+    />
+    <Stack.Screen
+      name="Settings"
+      component={Settings}
+    />
+  </Stack.Navigator>
+</NavigationContainer>
 
-
+export default Routes

@@ -1,8 +1,12 @@
-export default (ip, port) => {
-  client = new WebSocket(`ws://${ip}:${port}/`)
+export default (host, port) => {
 
-  const handle = (f) => client.onmessage = pack => {
-    f(JSON.parse(pack.data))
+  if (host == undefined) host = 'deepin'
+  if (port == undefined) port = '12345'
+
+  client = new WebSocket(`ws://${host}:${port}/`)
+
+  const handle = callback => client.onmessage = pack => {
+    callback(JSON.parse(pack.data))
   }
   const send = (text) => client.send(text)
 

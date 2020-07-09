@@ -1,5 +1,7 @@
-import * as React from 'react';
-import { TouchableOpacity } from 'react-native';
+import React from 'react';
+
+import { Touchable } from './Containers'
+
 import { useNavigation } from '@react-navigation/native';
 
 import { MaterialIcons } from "@expo/vector-icons";
@@ -7,20 +9,9 @@ import { MaterialIcons } from "@expo/vector-icons";
 export default function () {
   const navigation = useNavigation();
 
-  return (
-    <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('Settings');
-        }}
-        style={{
-          width: 50,
-          height: 50,
-          backgroundColor: '#fff',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <MaterialIcons name="settings" size={20} color="#039be5" />
-      </TouchableOpacity>
-  );
+  return <>
+    <Touchable onPress={() => navigation.navigate('Settings')}>
+      <MaterialIcons name="settings" size={20} color="#039be5" />
+    </Touchable>
+  </>
 }

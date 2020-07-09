@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, KeyboardAvoidingView } from "react-native";
+import React, { useEffect } from 'react';
+import {
+  View,
+  StyleSheet,
+  Text,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 
-import Storage from "../services/storage";
-
-const storage = Storage()
+import CommandsSettings from "../components/CommandsSettings";
+import GeralSettings from "../components/GeralSettings";
 
 export default function () {
-  const [ip, setIp] = useState('')
-  const [port, setPort] = useState('')
 
   useEffect(() => {
     init()
@@ -15,41 +18,33 @@ export default function () {
 
 
   async function init() {
-    setIp( await storage.get_ip() )
-    setPort( await storage.get_port() )
+    
   }
 
   return (
-    <KeyboardAvoidingView style={styles.container} >
+    <KeyboardAvoidingView
+      behavior="height"
+      style={styles.container}
+      keyboardVerticalOffset={-200}>
 
-      <View style={styles.confContainer}>
-        <Text style={styles.confTitle}>Host</Text>
-        <TextInput
-          style={styles.input}
-          value={ip}
-          onChangeText={setIp}
-          placeholder="192.168.1.4"
-          onSubmitEditing={ async () => {
-            console.log(`new ip: ${ip}`)
-            await storage.set_ip(ip)
-          }}
-        />
-      </View>
+      <ScrollView 
+        keyboardShouldPersistTaps="always" 
+        style={styles.scrolContainer}>
 
-      <View style={styles.confContainer}>
-        <Text style={styles.confTitle}>Port</Text>
-        <TextInput
-          style={styles.input}
-          value={port}
-          onChangeText={setPort}
-          placeholder="54348"
-          onSubmitEditing={ async () => {
-            console.log(`new port: ${port}`)
-            await storage.set_port(port)
-          }}
-        />
-      </View>
+        <View style={styles.tabContainer}>
+          <Text style={styles.tabTitle}>Geral</Text>
+        </View>
+        
+        <GeralSettings />
 
+        <View style={styles.tabContainer}>
+          <Text style={styles.tabTitle}>Mensagens Rápidas</Text>
+        </View>
+
+       <CommandsSettings /> 
+
+        
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }
@@ -57,36 +52,21 @@ export default function () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    backgroundColor: 'white'
   },
-  confTitle: {
-    color: '#444',
-    fontSize: 15,
-    position: "relative",
-    top: 0,
-    textAlign: "center",
-    zIndex: 1
+  scrolContainer: {
+    flex: 1,
+    alignSelf: "stretch"
   },
-  confContainer: {
-    margin: 15,
-    padding: 5,
-    width: '75%',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+  tabContainer: {
+    borderColor: '#039be5',
+    borderBottomWidth: 2,
+    margin: 5,
+    padding: 5
   },
-  input: {
-    flexGrow: 1,
-    width: '50%',
-    height: 40,
-    backgroundColor: '#fefefe',
-    borderWidth: 0,
-    borderColor: '#ddd',
-    borderRadius: 10,
-    color: '#444',
-    paddingHorizontal: 20,
-    fontSize: 16,
+  tabTitle: {
+    color: '#039be5',
+    fontSize: 16
   },
+  
 })

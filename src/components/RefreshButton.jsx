@@ -1,34 +1,19 @@
-import * as React from "react";
-import { TouchableOpacity } from "react-native";
+import React from "react";
+
+import { Touchable } from "./Containers";
 
 import { useNavigation } from '@react-navigation/native';
 
-import { NavigationContainer, CommonActions } from "@react-navigation/native";
-
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function() {
+const RefreshButton = () => {
   const navigation = useNavigation();
-  return (
-    <TouchableOpacity
-      onPress={() =>
-        navigation.dispatch(
-          CommonActions.reset({
-            routes: [
-              { name: "Chat", }
-            ]
-          })
-        )
-      }
-      style={{
-        width: 50,
-        height: 50,
-        backgroundColor: "#fff",
-        justifyContent: "center",
-        alignItems: "center"
-      }}
-    >
+
+  return <>
+    <Touchable onPress={() => navigation.reset({ routes: [{ name: 'Chat' }] })} >
       <MaterialIcons name="refresh" size={20} color="#039be5" />
-    </TouchableOpacity>
-  );
+    </Touchable>
+  </>
 }
+
+export default RefreshButton

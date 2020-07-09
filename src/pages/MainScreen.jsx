@@ -12,14 +12,11 @@ import InputBox from "../components/InputBox";
 import MessageBox from "../components/MessageBox";
 
 import Client from "../services/socket";
-import storage from "../services/storage";
+import Storage from "../services/storage";
 
-const Storage = storage()
-
-import { setupSocket } from "../services/util";
-
-export default function({ navigation }) {
+export default function ({ navigation }) {
   const [messages, setMessages] = useState([]);
+  const background = require('../../assets/sarah.png')
 
   useEffect(() => {
     initServer();
@@ -27,15 +24,12 @@ export default function({ navigation }) {
   }, []);
 
   async function initServer() {
-    console.log('mainScreen');
-    
-    Sock = Client(
-      await Storage.get_ip(), 
-      await Storage.get_port()
-    );
+    const host = await Storage.get('host')
+    const port = await Storage.get('port')
 
-    Sock.handle(handleMessages);
-    // Sock.onclose = () => initServer
+    Sock = Client( host, port );
+
+    Sock.handle(handleMessages)
   }
 
   function handleMessages(message) {
@@ -45,8 +39,6 @@ export default function({ navigation }) {
       setMessages(messages => [...message.content]);
       return;
     } else {
-      console.log(message);
-
       if (message.voice) {
         Speech.speak(`${message.text}`, {
           voice: "pt-BR-SMTf00",
@@ -64,6 +56,7 @@ export default function({ navigation }) {
     var hours = new Date().getHours();
     var minutes = new Date().getMinutes();
     minutes = minutes < 10 ? `0${minutes}` : `${minutes}`;
+
     const date = `${hours}:${minutes}`;
 
     const message = {
@@ -77,14 +70,17 @@ export default function({ navigation }) {
   }
 
   return (
+    <ImageBackground
+      style={styles.bg}
+      source={background}
+      resizeMode="cover">
       <KeyboardAvoidingView
         behavior="height"
         style={styles.container}
-        keyboardVerticalOffset={80}
-        
-      >
+        keyboardVerticalOffset={80}>
+
         <AutoScroll style={styles.scrollContainer}>
-          {messages.map( (msg, i) => (
+          {messages.map((msg, i) => (
             <MessageBox
               key={i}
               sender={msg.sender}
@@ -94,7 +90,11 @@ export default function({ navigation }) {
           ))}
         </AutoScroll>
         <InputBox onSubmit={handleSubmit} />
+
       </KeyboardAvoidingView>
+
+    </ImageBackground>
+
   );
 }
 
@@ -102,14 +102,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "stretch",
   },
   scrollContainer: {
-    flex: 1,
+    flex: 3,
     alignSelf: "stretch"
   },
   bg: {
-    width: "100%",
-    height: "100%",
+    flex: 1,
+    justifyContent: "center",
   }
 });
