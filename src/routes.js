@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { ThemeProvider } from "styled-components";
 import Themes from "./services/themes.json";
 
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Main from "./pages/MainScreen"
