@@ -1,15 +1,21 @@
+<<<<<<< HEAD
 import React from "react";
 import styled from "styled-components";
 
 import { Text, Switch } from 'react-native';
 
 // Styled
+=======
+import styled from "styled-components";
+
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
 const Touchable = styled.TouchableOpacity`
   width: 50px;
   height: 50px;
   justify-content: center;
   align-items: center;
 `
+<<<<<<< HEAD
 
 const Row = styled.View`
   flex: 1;
@@ -42,4 +48,16 @@ export {
   Touchable,
   Row,
   SwitchComponent
+=======
+const Row = styled.View`
+  flex: 1;
+  flex-direction: row;
+  margin: 10px;
+  align-items: stretch;
+`
+
+export {
+  Touchable,
+  Row
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
 }

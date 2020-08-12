@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+<<<<<<< HEAD
 import { Row, SwitchComponent } from "./Containers";
+=======
+import { Text, Switch } from 'react-native';
+
+import { Row } from "./Containers";
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
 import Button from "./Button";
 import TextInput from "./TextInput";
 import CommandList from './CommandList'
@@ -16,6 +22,25 @@ const Form = styled.View`
   flex-wrap: wrap;
 `
 
+<<<<<<< HEAD
+=======
+const SwitchContainer = styled.View`
+  flex: 1;
+  margin: auto;
+  align-items: center;
+`
+
+const SwitchComponent = ({ toggleSwitch, autoSend }) => <SwitchContainer >
+  <Text style={{ color: "#039be5", fontWeight: "bold" }}>AutoSend</Text>
+  <Switch
+    trackColor={{ false: "#ccc", true: "#039be5" }}
+    thumbColor={autoSend ? "#fff" : "#fff"}
+    ios_backgroundColor="#3e3e3e"
+    onValueChange={toggleSwitch}
+    value={autoSend} />
+</SwitchContainer>
+
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
 // -=-
 
 const Component = () => {
@@ -63,8 +88,12 @@ const Component = () => {
           placeholder="Digite um Comand" />
         <SwitchComponent
           toggleSwitch={toggleSwitch}
+<<<<<<< HEAD
           value={newCommand.autoSend}
           label={'Auto Enviar'} />
+=======
+          autoSend={newCommand.autoSend} />
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
       </Row>
       <Row>
         <Button

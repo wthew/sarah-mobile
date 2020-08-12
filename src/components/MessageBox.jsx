@@ -11,7 +11,12 @@ const Box = styled.View`
     min-width: 32px;
     min-height: 32px;
     max-width: 256px;
+<<<<<<< HEAD
     elevation: 5;
+=======
+    border-width: 2px;
+    border-color: #039be5;
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
     border-radius: 25px;
     padding: 10px;
     ${({ sender }) => sender == 'bot' ? 'border-top-left-radius' : 'border-top-right-radius'}: 0px;
@@ -20,7 +25,11 @@ const Box = styled.View`
 const MesageText = styled.Text`
   margin: 5px;
   font-size: 14px;
+<<<<<<< HEAD
   color: #888 ;
+=======
+  color: ${props => props.sender == 'bot' ? '#039be5' : '#888'} ;
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
 `;
 
 const LabelTime = styled.Text`
@@ -29,6 +38,7 @@ const LabelTime = styled.Text`
   color: #039be5;
 `;
 
+<<<<<<< HEAD
 const MessageBox = (props) => {
   let { sender, text, date } = props
   date = date.replace(/\d\d\/\d\d - /, '')
@@ -38,5 +48,11 @@ const MessageBox = (props) => {
     <MesageText>{text}</MesageText>
   </Box>
 }
+=======
+const MessageBox = ({ sender, text, date }) => <Box sender={sender}>
+  <LabelTime>{date}</LabelTime>
+  <MesageText sender={sender}>{text}</MesageText>
+</Box>
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
 
 export default MessageBox

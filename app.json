@@ -3,6 +3,7 @@
     "name": "Sarah",
     "slug": "mobile",
     "privacy": "public",
+<<<<<<< HEAD
     "platforms": [
       "android"
     ],
@@ -11,6 +12,17 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/sarah.png",
+=======
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "android"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -28,7 +40,11 @@
       "versionCode": 1,
       "adaptiveIcon": {
         "backgroundColor": "#039be5",
+<<<<<<< HEAD
         "foregroundImage": "./assets/icon.png"
+=======
+        "foregroundImage": "./assets/icon-fg.png"
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
       }
     },
     "description": ""

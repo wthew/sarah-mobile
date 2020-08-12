@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@react-native-community/async-storage": "~1.11.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.0.0-alpha.29",
@@ -24,6 +25,23 @@
     "react-native-reanimated": "~1.9.0",
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
+=======
+    "@react-native-community/async-storage": "^1.11.0",
+    "@react-native-community/masked-view": "0.1.5",
+    "@react-navigation/native": "^5.0.0-alpha.29",
+    "@react-navigation/stack": "^5.0.0-alpha.63",
+    "events": "^3.1.0",
+    "expo": "~36.0.0",
+    "expo-speech": "~8.0.0",
+    "react": "~16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
+    "react-native-auto-scroll": "^0.0.1",
+    "react-native-gesture-handler": "~1.5.0",
+    "react-native-paper": "^3.10.1",
+    "react-native-reanimated": "~1.4.0",
+    "react-native-safe-area-context": "0.6.0",
+    "react-native-screens": "2.0.0-alpha.12",
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.0.10",
     "react-navigation-hooks": "^1.1.0",
@@ -32,7 +50,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
+<<<<<<< HEAD
     "babel-preset-expo": "^8.2.3"
+=======
+    "babel-preset-expo": "~8.0.0"
+>>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
   },
   "private": true
 }
