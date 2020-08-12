@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Sarah",
+    "slug": "mobile",
+    "privacy": "public",
+    "platforms": [
+      "android"
+    ],
+    "version": "1.2.2",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/sarah.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.wthew.sarah",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#039be5",
+        "foregroundImage": "./assets/icon.png"
+      }
+    },
+    "description": ""
+  }
+}
