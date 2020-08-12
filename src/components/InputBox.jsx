@@ -8,7 +8,6 @@ import { Row } from "./Containers";
 import CommandList from './CommandList'
 
 const Container = styled.View`
-<<<<<<< HEAD
   bottom: 0;
   position: absolute;
   width: 100%;
@@ -18,15 +17,6 @@ const Container = styled.View`
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   elevation: 15;
-=======
-  height: 150px;
-  bottom: 0;
-  padding:5px;
-  flex-direction: column;
-  background-color: white;
-  border-top-width: 2px;
-  border-top-color: #039be5;
->>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
 `
 
 const Touchable = styled.TouchableOpacity`
@@ -45,18 +35,12 @@ const InputBox = ({ onSubmit }) => {
 
   function handleSubmit() {
     if (message.trim() != "") {
-<<<<<<< HEAD
       setMessage("");
       onSubmit(message);
-=======
-      onSubmit(message);
-      setMessage("");
->>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
     }
   }
 
   function CommandSelected(command) {
-<<<<<<< HEAD
     if (command.autoSend) {
       onSubmit(command.text)
       setMessage("")
@@ -65,13 +49,6 @@ const InputBox = ({ onSubmit }) => {
   }
 
   return <Container>
-=======
-    if (command.autoSend) onSubmit(command.text)
-    else setMessage(command.text + " ")
-  }
-
-  return <Container >
->>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
 
     <Row>
       <CommandList handleCommandSelected={CommandSelected} />

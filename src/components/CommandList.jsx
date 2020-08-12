@@ -12,10 +12,7 @@ const ScrollContainer = styled.ScrollView`
 `
 
 const CommandContainer = styled.View`
-<<<<<<< HEAD
   height: 50px;
-=======
->>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
   margin: 0 5px;
 `
 

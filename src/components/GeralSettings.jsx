@@ -4,25 +4,12 @@ import styled from 'styled-components';
 import Button from "./Button"
 import TextInput from "./TextInput";
 
-<<<<<<< HEAD
 import { Row } from "./Containers";
 
-=======
->>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
 import Storage from "../services/storage";
 
 // Mini-Components
 
-<<<<<<< HEAD
-=======
-const Row = styled.View`
-  padding: 15px;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-`
-
->>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
 const Title = styled.Text`
   flex: 1;
   color: #444;
@@ -36,10 +23,6 @@ const Component = () => {
   const [host, setHost] = useState('')
   const [port, setPort] = useState('')
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 2e60b4fcc829d3a63390324e0fd03b330266d4d9
   useEffect(() => {
     async function init() {
       const host = await Storage.get('host') || ''
