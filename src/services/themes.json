@@ -1,8 +1,22 @@
 {
    "dark": {
-      "background": "#000"
+      "primary": "#0f0",
+      "secondary": "#bbb5",
+      "background": "#121212",
+      "foreground": "#000",
+      "text": "#bbb",
+      "border": "#333",
+      "highlight": "#ddd",
+      "thumbColor": "#ccc"
    },
    "light": {
-      "background": "#fff'"
+      "primary": "#f00",
+      "secondary": "#039be555",
+      "background": "#fff",
+      "foreground": "#eee",
+      "border": "#039be5",
+      "text": "#777",
+      "highlight": "#039be5",
+      "thumbColor": "#fff"
    }
 }

@@ -3,7 +3,13 @@ import { Row, SwitchComponent } from "./Containers";
 
 import Storage from "../services/storage";
 const components = () => {
-  const [enable, setEnable] = useState(Storage.get('use_voice') || false)
+  const [enable, setEnable] = useState(false)
+
+  useEffect(() => {
+    const init = async () => {
+      setEnable(await Storage.get('use_voice'))
+    };init()
+  }, [])
 
   return <Row>
     <SwitchComponent

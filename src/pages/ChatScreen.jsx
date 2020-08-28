@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as Speech from "expo-speech";
 
-import {
-  StyleSheet,
-  KeyboardAvoidingView,
-  View
-} from "react-native";
+import { View } from "react-native";
 
 import Storage from "../services/storage";
 
@@ -14,36 +10,42 @@ import InputBox from "../components/InputBox";
 import MessageBox from "../components/MessageBox";
 
 import makeClient from "../services/socket";
+import { ThemeContext } from "styled-components";
 
-export default function ({ navigation }) {
+const Main = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
-  const background = require('../../assets/sarah.png')
+  const [voice, setVoice] = useState(false)
+  const theme = useContext(ThemeContext)
 
   useEffect(() => {
-    initServer();
+    async function initServer() {
+      Sock = await makeClient()
+      Sock.handle(handleMessages)
 
+      setVoice(await Storage.get('use_voice'))
+      Storage.onChangeKey('use_voice', handleVoiceChange)
+    } initServer();
+
+    return () => {
+      Storage.releaseListener('use_voice', handleVoiceChange)
+    }
   }, []);
 
-  async function initServer() {
-    Sock = await makeClient()
-    Sock.handle(handleMessages)
+  async function handleVoiceChange() {
+    await setVoice(await Storage.get('use_voice'))
   }
 
   function handleMessages(message) {
     const { type } = message;
 
     if (type == "db") {
-      setMessages([...message.content]);
-      return;
+      setMessages([...message.content])
     } else {
-      if (Storage.get('use_voice')) {
-        Speech.speak(`${message.text}`, {
-          voice: "pt-BR-SMTf00",
-          rate: 0.5
-        });
-      }
-
       setMessages(messages => [...messages, message]);
+      if (voice && message.silent == false) {
+        console.log('falando...')
+        Speech.speak(`${message.text}`);
+      }
     }
   }
 
@@ -66,10 +68,16 @@ export default function ({ navigation }) {
     Sock.send(text)
   }
 
-  return <View
-    style={styles.container}>
+  return <View style={{
+    flex: 1,
+    alignItems: "stretch",
+  }}>
 
-    <AutoScroll style={styles.scrollContainer}>
+    <AutoScroll style={{
+      flex: 1,
+      alignSelf: "stretch",
+      marginBottom: 170,
+    }}>
       {messages.map((msg, i) => <MessageBox
         key={i}
         sender={msg.sender}
@@ -84,15 +92,4 @@ export default function ({ navigation }) {
   </View>
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "stretch",
-    backgroundColor: "white"
-  },
-  scrollContainer: {
-    flex: 1,
-    alignSelf: "stretch",
-    marginBottom: 170
-  }
-});
+export default Main

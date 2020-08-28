@@ -14,19 +14,20 @@ const storage = (function () {
   const set = async (key, value) => {
     data[key] = value
     await AsyncStorage.setItem('data', JSON.stringify(data))
-    eventManager.emit('set');
+    eventManager.emit(key);
+    console.log(`${key} is now: ${value}`)
   }
 
   const get = async (key) => {
     return JSON.parse(await AsyncStorage.getItem('data'))[key]
   }
 
-  const on = (event, callback) => {
-    eventManager.on(event, callback);
+  const onChangeKey = (key, callback) => {
+    eventManager.on(key, callback);
   }
 
-  const off = (event, callback) => {
-    eventManager.removeListener(event, callback)
+  const releaseListener = (key, callback) => {
+    eventManager.off(key, callback)
   }
 
   init()
@@ -35,8 +36,8 @@ const storage = (function () {
     init,
     set,
     get,
-    on,
-    off
+    onChangeKey,
+    releaseListener
   }
 })()
 

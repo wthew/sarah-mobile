@@ -5,14 +5,14 @@ const Container = styled.TextInput`
   flex: 1;
   width: auto;
   height: 50px;
-  background-color: #fff2;
+  border-color: ${props => props.theme.border};
+  background-color: ${props => props.theme.background};
   color: #888;
   padding-left: 20px;
   padding-right: 20px;
   font-size: 14px;
   border-radius: 25px;
   border-width: 2px;
-  border-color: #ccc7;
 `
 
 const Component = (props) => {

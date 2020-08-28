@@ -60,7 +60,7 @@ const Component = () => {
         <TextInput
           value={newCommand.text}
           handleChangeText={text => setNewCommand({ ...newCommand, text })}
-          placeholder="Digite um Comand" />
+          placeholder="Digite um Comando" />
         <SwitchComponent
           toggleSwitch={toggleSwitch}
           value={newCommand.autoSend}

@@ -1,57 +1,81 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider, ThemeContext } from "styled-components";
 import Themes from "./services/themes.json";
 
-import { NavigationContainer, DarkTheme } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
 
-import Main from "./pages/MainScreen"
+import RefreshButton from "./components/RefreshButton";
+import SettingsButton from "./components/SettingsButton";
+
+import Chat from "./pages/ChatScreen"
 import Settings from "./pages/SettingsScreen";
 
-import SettingsButton from "./components/SettingsButton";
-import RefreshButton from "./components/RefreshButton";
-
 import Storage from "./services/storage";
+import { StatusBar } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-const Routes = () => <NavigationContainer>
-  <Stack.Navigator
-    headerMode='float'
+// const Routes = () => {
+//   const theme = useContext(ThemeContext)
+
+// }
+
+const Routes = () => {
+  const theme = useContext(ThemeContext)
+  return <Stack.Navigator
+    headerMode='screen'
+    mode='card'
     screenOptions={{
-      headerTintColor: '#039be5',
+      headerTintColor: theme.highlight,
       headerTitleAlign: "center",
       headerTitleStyle: {
         fontSize: 18
+      },
+      headerStyle: {
+        elevation: 0, //for android
+        shadowOpacity: 0, //for ios
+        borderBottomWidth: 0, //for ios
       }
     }}>
     <Stack.Screen
       name="Chat"
-      component={Main}
+      component={Chat}
       options={{
         headerLeft: () => <RefreshButton />,
         headerRight: () => <SettingsButton />,
       }}
     />
-    <Stack.Screen
-      name="Settings"
-      component={Settings}
-    />
+
+    <Stack.Screen name='Settings' component={Settings} />
   </Stack.Navigator>
-</NavigationContainer>
+}
 
 export default function () {
-  const [theme, setTheme] = useState({})
+  const [theme, setTheme] = useState('light')
 
-  useEffect(()=>{
+  useEffect(() => {
     const init = async () => {
-      setTheme(await Storage.get('theme') || 'dark')
-      console.log(theme);
+      Storage.onChangeKey('theme', handlethemeChange )
+      setTheme(await Storage.get('theme'))
     }; init()
-    
+
+    return () => {
+      Storage.releaseListener('theme', handlethemeChange)
+    }
   })
+  const handlethemeChange = async () => {
+    const newTheme = await Storage.get('theme')
+    setTheme(newTheme)
+  }
+
   return <ThemeProvider theme={Themes[theme]}>
-    <Routes />
+    <StatusBar
+      backgroundColor={Themes[theme].background}
+      barStyle={theme == 'dark' ? 'light-content' : 'dark-content'} />
+    <NavigationContainer theme={theme == 'dark' ? DarkTheme : DefaultTheme}>
+      <Routes />
+    </NavigationContainer>
   </ThemeProvider>
 }

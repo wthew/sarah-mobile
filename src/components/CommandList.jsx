@@ -22,15 +22,11 @@ const Component = ({ handleCommandSelected }) => {
   useEffect(() => {
     async function init() {
       await loadCommands()
-      Storage.on('set', handleStorageChanges)
+      Storage.onChangeKey('commands', loadCommands)
     } init()
 
-    return () => Storage.off('set', handleStorageChanges)
+    return () => Storage.releaseListener('commands', loadCommands)
   }, [])
-
-  const handleStorageChanges = async () => {
-    await loadCommands()
-  }
 
   const loadCommands = async () => {
     const commands = await Storage.get('commands') || []

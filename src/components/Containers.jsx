@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useContext } from "react";
+import styled, { ThemeContext } from "styled-components";
 
 import { Text, Switch } from 'react-native';
 
@@ -22,21 +22,27 @@ const Row = styled.View`
 
 const SwitchContainer = styled.View`
   flex: 1;
+  justify-content: flex-end;
+  padding: 0 0 0 15px; 
   margin: auto;
   align-items: center;
+  flex-direction: row;
 `
 
 // Functionals
 
-const SwitchComponent = ({ toggleSwitch, value, label }) => <SwitchContainer >
-  <Text style={{ color: "#039be5", fontWeight: "bold" }}>{label}</Text>
-  <Switch
-    trackColor={{ false: "#ccc", true: "#039be5" }}
-    thumbColor={value ? "#fff" : "#fff"}
-    ios_backgroundColor="#3e3e3e"
-    onValueChange={(value) => {toggleSwitch(value)}}
-    value={value} />
-</SwitchContainer>
+const SwitchComponent = ({ toggleSwitch, value, label }) => {
+  const theme = useContext(ThemeContext)
+
+  return <SwitchContainer >
+    <Text style={{ color: theme.text, paddingRight: 15 }}>{label}</Text>
+    <Switch
+      trackColor={{ false: theme.background, true: theme.secondary }}
+      thumbColor={theme.thumbColor}
+      onValueChange={(value) => { toggleSwitch(value) }}
+      value={value} />
+  </SwitchContainer>
+}
 
 export {
   Touchable,

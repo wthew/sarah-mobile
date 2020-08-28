@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Box = styled.View`
     margin: 5px;
-    background-color: white;
+    background-color: ${props => props.theme.background};
     align-self: ${props => props.sender == 'bot' ? 'flex-start' : 'flex-end'};
     align-items: ${props => props.sender == 'bot' ? 'flex-start' : 'flex-end'};
     min-width: 32px;
@@ -20,13 +20,13 @@ const Box = styled.View`
 const MesageText = styled.Text`
   margin: 5px;
   font-size: 14px;
-  color: #888 ;
+  color: ${props => props.theme.text} ;
 `;
 
 const LabelTime = styled.Text`
   margin: auto;
   font-size: 9px;
-  color: #039be5;
+  color: ${props => `${props.theme.text}a`};
 `;
 
 const MessageBox = (props) => {

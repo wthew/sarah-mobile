@@ -6,8 +6,8 @@ const Container = styled.TouchableOpacity`
   height: 50px;
   padding: 15px;
   border-radius: 25px;
-  border-color: #039be5;
-  background-color: #fff2;
+  border-color: ${props => props.theme.border};
+  background-color: ${props => props.theme.background};
   border-width: 2px;
   align-items: center;
   justify-content: center;
@@ -16,7 +16,7 @@ const Container = styled.TouchableOpacity`
 const Label = styled.Text`
   flex: 1;
   font-size: 14px;
-  color: #039be5;
+  color: ${props => props.theme.highlight};
   font-weight: bold;
 `
 

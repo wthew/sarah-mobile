@@ -1,44 +1,63 @@
-import React, { useEffect } from 'react';
-import { useColorScheme } from 'react-native-appearance';
+import React, { useContext } from 'react';
+
 import {
   View,
   StyleSheet,
   Text,
-  KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
+
+import { createStackNavigator } from '@react-navigation/stack';
 
 import CommandsSettings from "../components/CommandsSettings";
 import GeralSettings from "../components/GeralSettings";
 
-import VoiceSettings from "../components/Voice";
-
-export default function () {
-  const colorScheme = useColorScheme();
+import VoiceSettings from "../components/VoiceSettings";
+import styled, { ThemeContext } from 'styled-components';
 
 
-  return <ScrollView style={styles.scrolContainer}>
+const Stack = createStackNavigator();
 
-    <Text>{colorScheme}</Text>
+
+const Tab = ({ label }) => {
+  const theme = useContext(ThemeContext)
+
+  return <View style={{
+
+  }}>
+    <Text style={{
+      color: theme.highlight,
+      fontSize: 16
+    }}>
+      {label}
+    </Text>
+
+  </View>
+}
+
+const Settings = () => {
+
+  return <ScrollView style={{
+      flex: 1,
+      alignSelf: "stretch",
+      padding: 10
+    }}>
+
 
     <View
-      style={styles.container}>
+      style={{
+        flex: 1,
+      }}>
 
-      <View style={styles.tabContainer}>
-        <Text style={styles.tabTitle}>Geral</Text>
-      </View>
+      <Tab label="Geral" />
 
       <GeralSettings />
 
-      <View style={styles.tabContainer}>
-        <Text style={styles.tabTitle}>Mensagens Rápidas</Text>
-      </View>
+      <Tab label="Mensagens Rápidas" />
 
       <CommandsSettings />
 
-      <View style={styles.tabContainer}>
-        <Text style={styles.tabTitle}>Voz</Text>
-      </View>
+      <Tab label="Voz" />
 
       <VoiceSettings />
 
@@ -46,23 +65,19 @@ export default function () {
   </ScrollView>
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrolContainer: {
-    flex: 1,
-    alignSelf: "stretch",
-    backgroundColor: 'white'
-  },
-  tabContainer: {
-    borderColor: '#039be5',
-    borderBottomWidth: 2,
-    margin: 5,
-    padding: 5
-  },
-  tabTitle: {
-    color: '#039be5',
-    fontSize: 16
-  },
-})
+export default Settings
+// export default function () {
+//   const theme = useContext(ThemeContext)
+//   return <Stack.Navigator
+//     headerMode='float'
+//     screenOptions={{
+//       headerTintColor: theme.highlight,
+//       animationEnabled: true
+      
+//     }}>
+//     <Stack.Screen
+//       name="Settings"
+//       component={Settings}
+//     />
+//   </Stack.Navigator>
+// }

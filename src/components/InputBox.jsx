@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import styled from 'styled-components'
+import React, { useState, useContext } from "react";
+
+import styled, { ThemeContext } from 'styled-components'
 
 import { MaterialIcons } from "@expo/vector-icons";
 
@@ -14,9 +15,8 @@ const Container = styled.View`
   padding:5px;
   flex-direction: column;
   background-color: ${props => props.theme.background};
-  border-top-right-radius: 15px;
-  border-top-left-radius: 15px;
-  elevation: 15;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 `
 
 const Touchable = styled.TouchableOpacity`
@@ -25,13 +25,14 @@ const Touchable = styled.TouchableOpacity`
   height: 50px;
   justify-content: center;
   align-items: center;
-  border-color: #039be5;
+  border-color: ${props => props.theme.border};
   border-width: 2px;
   border-radius: 25px;
 `
 
 const InputBox = ({ onSubmit }) => {
   const [message, setMessage] = useState("");
+  const theme = useContext(ThemeContext)
 
   function handleSubmit() {
     if (message.trim() != "") {
@@ -63,7 +64,7 @@ const InputBox = ({ onSubmit }) => {
         autoFocus={true} />
 
       <Touchable onPress={handleSubmit} >
-        <MaterialIcons name="send" size={20} color="#039be5" />
+        <MaterialIcons name="send" size={20} color={theme.highlight} />
       </Touchable>
     </Row>
 
